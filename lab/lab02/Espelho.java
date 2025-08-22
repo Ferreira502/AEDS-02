@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Espelho 
+class TP01Q01  
 {
     public static void imprimirInvertido(int num) 
     {
