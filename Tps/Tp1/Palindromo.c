@@ -1,31 +1,54 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX 100
+#define MAX 1000
 
-int main ()
+int comparaString(char *palavra) 
 {
-    char palavra [MAX];
-    int palindromo = 1;
+    return strcmp(palavra, "FIM");
+}
 
-    scanf("%s", &palavra);
-    int tamanho = strlen(palavra);
-
-    for (int i = 0; i < tamanho / 2; i++) 
+int ehPalindromo(char palavra[], int inicio, int fim) 
+{
+    if (inicio >= fim) 
     {
-        if (palavra[i] != palavra[tamanho - 1 - i]) 
+        return 1;
+    }
+    if (palavra[inicio] != palavra[fim]) 
+    {
+        return 0;
+    }
+    return ehPalindromo(palavra, inicio + 1, fim - 1);
+}
+
+int main() 
+{
+    char palavra[MAX];
+    int resultado = 1;
+
+    while (resultado != 0) 
+    {
+        fgets(palavra, MAX, stdin);
+        palavra [strcspn(palavra, "\n")] = '\0';
+        
+        resultado = comparaString(palavra);
+
+        if (comparaString(palavra) == 0) 
         {
-            palindromo = 0;
+            break;
+        }
+
+        int tamanho = strlen(palavra);
+
+        if (ehPalindromo(palavra, 0, tamanho - 1)) 
+        {
+            printf("SIM\n");
+        } 
+        else 
+        {
+            printf("NAO\n");
         }
     }
-    
-    if (palindromo)
-    {
-        printf("SIM\n");
-    }
-    else
-    {
-        printf("NAO\n");
-    }
-    
+
+    return 0;
 }

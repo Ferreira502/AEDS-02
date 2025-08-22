@@ -14,10 +14,6 @@ class Palindromo
             int tamanho = palavra.length();
             for ( int i = 0; i < tamanho / 2; i ++)
                 {
-                    if ( palavra.charAt(i) == ' ')
-                    {
-                        i++;
-                    }
                     if ( palavra.charAt(i) != palavra.charAt(tamanho - 1 - i))
                     {
                         return false;
@@ -34,7 +30,7 @@ class Palindromo
                 {
                     String palavra;
                     // System.out.println("Digite uma palavra: ");
-                    palavra = sc.next();
+                    palavra = sc.nextLine();
                     resultado = comparaString(palavra);
 
                     if ( resultado != 0)
