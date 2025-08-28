@@ -2,60 +2,50 @@ import java.util.*;
 
 class TP01Q04 
 {
-
-    public static String random ( String palavra )
+    //metodo para trocar as palavras aleatorias
+    public static String random (String palavra, Random gerador)
     {
-        // Gera duas letras minusculas aleatorias
-        Random gerador = new Random();
-        gerador.setSeed(4);
         char letra  = (char)('a' + Math.abs(gerador.nextInt()) % 26);
         char letra1 = (char)('a' + Math.abs(gerador.nextInt()) % 26);
 
-        String resultado = ""; 
-        
+        char resultado[] = new char[palavra.length()];
+            
         for (int i = 0; i < palavra.length(); i++)
+        {
+            resultado[i] = palavra.charAt(i);
+            for (int j = 0; j < palavra.length(); j++)
             {
-                char c = palavra.charAt(i);
-                if ( c == letra )
+                if (resultado[j] == letra)
                 {
-                    resultado = resultado + letra1;
-                }
-                else
-                {
-                    resultado = resultado + c;
+                    resultado[j] = letra1;
                 }
             }
-        return resultado;
-    }
-    
-    
-    public static int comparaString(String palavra)
-    {
-        String str1 = "FIM";
-        return palavra.compareTo(str1); 
+        }
+        return new String(resultado);
     }
 
-    // Método principal
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in); 
-        String palavra;        
-        String newPalavra;     
-        int resultado = 1;    
-
-        // Laço que continua enquanto a palavra digitada for diferente de "FIM"
-        while (resultado != 0) 
+        Random gerador = new Random();
+        gerador.setSeed(4);
+    
+        while (sc.hasNextLine()) 
         {
-            palavra = sc.nextLine();
+            String palavra = sc.nextLine();
 
-            if (comparaString(palavra) == 0) // Verifica se a palavra é "FIM"
+            if (palavra.length() == 3 &&
+                palavra.charAt(0) == 'F' &&
+                palavra.charAt(1) == 'I' &&
+                palavra.charAt(2) == 'M') 
             {
                 break;
             }
             
-            resultado = comparaString(palavra);
-            newPalavra = random(palavra);
+            String newPalavra = random(palavra, gerador);
             System.out.println(newPalavra);
-        }   
+        }
+
+        sc.close();
     }
 }
