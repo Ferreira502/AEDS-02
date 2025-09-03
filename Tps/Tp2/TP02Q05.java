@@ -54,7 +54,7 @@ class TP02Q05 {
             String s2 = "";
             boolean segundaPalavra = false;
 
-            // Percorre a string manualmente e separa em s1 e s2
+            // Percorre a string e separa em s1 e s2
             for (int i = 0; i < entrada.length(); i++) 
             {
                 if (!segundaPalavra) 
