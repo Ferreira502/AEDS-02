@@ -36,10 +36,89 @@
  * identificador produzido deve ser seguido por um espaço em branco.
  */
 
+import java.util.Scanner;
 
-import java.util.*;
-
-public static void main (String[] args) 
+public class Main 
 {
-    
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        while (true) 
+        {
+            int N = sc.nextInt();
+            int M = sc.nextInt();
+            
+            if (N == 0 && M == 0) break;
+            
+            // Array para armazenar a contagem de aparições de cada jogador
+            // Os jogadores são de 1 a 10000
+            int[] contagem = new int[10001];
+            
+            // Ler os N rankings
+            for (int i = 0; i < N; i++) 
+            {
+                for (int j = 0; j < M; j++) 
+                {
+                    int jogador = sc.nextInt();
+                    contagem[jogador]++;
+                }
+            }
+            
+            // Encontrar a maior e segunda maior contagem
+            int maxContagem = 0;
+            int segundoMax = 0;
+            
+            for (int i = 1; i <= 10000; i++) 
+            {
+                if (contagem[i] > maxContagem) 
+                {
+                    segundoMax = maxContagem;
+                    maxContagem = contagem[i];
+                } 
+                else if (contagem[i] > segundoMax && contagem[i] < maxContagem) 
+                {
+                    segundoMax = contagem[i];
+                }
+            }
+            
+            // Se todos têm a mesma contagem (segundoMax == 0), então o melhor é o menor ID
+            // e os segundos são todos os outros jogadores com a mesma contagem
+            if (segundoMax == 0) 
+            {
+                int menorID = 10001;
+                for (int i = 1; i <= 10000; i++) 
+                {
+                    if (contagem[i] > 0 && i < menorID) 
+                    {
+                        menorID = i;
+                    }
+                }
+                
+                // Imprimir todos os jogadores exceto o menor ID
+                for (int i = 1; i <= 10000; i++) 
+                {
+                    if (contagem[i] > 0 && i != menorID) 
+                    {
+                        System.out.print(i + " ");
+                    }
+                }
+            } 
+            else 
+            {
+                // Imprimir todos os jogadores com segunda maior contagem em ordem crescente
+                for (int i = 1; i <= 10000; i++) 
+                {
+                    if (contagem[i] == segundoMax) 
+                    {
+                        System.out.print(i + " ");
+                    }
+                }
+            }
+            
+            System.out.println();
+        }
+        
+        sc.close();
+    }
 }
