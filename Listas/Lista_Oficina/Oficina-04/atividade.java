@@ -1,50 +1,101 @@
-import java.util.*;
+import java.util.Scanner;
 
-class atividade 
+public class QuickSort 
 {
-    public static void quicksort(int[] array, int esq, int dir) 
+    static int comparacoes = 0;
+    static int trocas = 0;
+
+    public static void quickSort(int[] arr, int low, int high) 
     {
-        int i = esq, j = dir;
-        int pivo = array[(dir + esq) / 2];
+        if (low < high) 
+        {
+            int pi = partition(arr, low, high);
+
+            quickSort(arr, low, pi);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+
+    public static int partition(int[] arr, int low, int high) 
+    {
+        int mid = low + (high - low) / 2;
+        int pivot = arr[mid];
+
+        int i = low;
+        int j = high;
+
         while (i <= j) 
         {
-            while (array[i] < pivo) i++;
-            while (array[j] > pivo) j--;
+            while (arr[i] < pivot) 
+            {
+                i++;
+                comparacoes++;
+            }
+            comparacoes++;
+
+            while (arr[j] > pivot) 
+            {
+                j--;
+                comparacoes++;
+            }
+            comparacoes++;
+
             if (i <= j) 
             {
-                int aux = array[i];
-                array[i] = array[j];
-                array[j] = aux;
+                swap(arr, i, j);
                 i++;
                 j--;
             }
         }
-        if (esq < j)  quicksort(array, esq, j);
-        if (i < dir)  quicksort(array, i, dir);
+
+        return j;
     }
-    
-    public static void main(String[] args)
+
+    private static void swap(int[] arr, int i, int j) 
+    {
+        if (i != j) 
+        {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            trocas++;
+        }
+    }
+
+    private static void printArray(int[] arr) 
+    {
+        for (int num : arr) 
+        {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) 
     {
         Scanner sc = new Scanner(System.in);
 
+        System.out.print("Digite o tamanho do array: ");
         int n = sc.nextInt();
-        int[] array = new int[n];
-        
-        for (int i = 0; i < n; i++)
-        {
-            array[i] = sc.nextInt();
+
+        int[] arr = new int[n];
+        System.out.println("Digite os elementos do array:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
         }
 
-        quicksort(array, 0, n - 1);
-        
-        for (int i = 0; i < array.length; i++) 
-        {
-            System.out.print(array[i]);
-            if (i < array.length - 1) 
-            {
-                System.out.print(" ");
-            }
-        }
-        System.out.println();
+        System.out.println("\nArray original:");
+        printArray(arr);
+
+        quickSort(arr, 0, arr.length - 1);
+
+        System.out.println("\nArray ordenado:");
+        printArray(arr);
+
+        System.out.println("\nEstatisticas:");
+        System.out.println("Comparacoes: " + comparacoes);
+        System.out.println("Trocas: " + trocas);
+
+        sc.close();
     }
 }
