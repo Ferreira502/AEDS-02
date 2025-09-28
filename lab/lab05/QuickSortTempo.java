@@ -1,6 +1,6 @@
 import java.util.*;
 
-class QuickSort
+class QuickSortTempo
 {
     public static void swap(int[] array, int i, int j) 
     {
@@ -114,47 +114,83 @@ class QuickSort
         if (i < right) QuickSortMedianOfThree(array, i, right);
     }
 
+    public static int[] gerarOrdenado(int n) 
+    {
+        int[] array = new int[n];
+        for (int i = 0; i < n; i++) array[i] = i;
+        return array;
+    }
+
+    public static int[] gerarQuaseOrdenado(int n) 
+    {
+        int[] array = gerarOrdenado(n);
+        Random rand = new Random();
+        for (int i = 0; i < n / 10; i++) 
+        { 
+            int a = rand.nextInt(n);
+            int b = rand.nextInt(n);
+            swap(array, a, b);
+        }
+        return array;
+    }
+
+    public static int[] gerarAleatorio(int n) 
+    {
+        Random rand = new Random();
+        int[] array = new int[n];
+        for (int i = 0; i < n; i++) array[i] = rand.nextInt(n * 10);
+        return array;
+    }
+
+    public static void testar(int[] original, String tipoArray) 
+    {
+        int n = original.length;
+        System.out.println("\n--- Testando com array " + tipoArray + " de tamanho " + n + " ---");
+
+        int[] arr1 = Arrays.copyOf(original, n);
+        int[] arr2 = Arrays.copyOf(original, n);
+        int[] arr3 = Arrays.copyOf(original, n);
+        int[] arr4 = Arrays.copyOf(original, n);
+
+        long start, end;
+        double tempo; // agora em double
+
+        start = System.nanoTime();
+        QuickSortMedianOfThree(arr1, 0, n - 1);
+        end = System.nanoTime();
+        tempo = (end - start) / 1_000_000.0;
+        System.out.printf("Mediana de tres: %.6f ms%n", tempo);
+
+        start = System.nanoTime();
+        QuickSortFirstPivot(arr2, 0, n - 1);
+        end = System.nanoTime();
+        tempo = (end - start) / 1_000_000.0;
+        System.out.printf("Primeiro pivo: %.6f ms%n", tempo);
+
+        start = System.nanoTime();
+        QuickSortLastPivot(arr3, 0, n - 1);
+        end = System.nanoTime();
+        tempo = (end - start) / 1_000_000.0;
+        System.out.printf("Ultimo pivo: %.6f ms%n", tempo);
+
+        start = System.nanoTime();
+        QuickSortRandomPivot(arr4, 0, n - 1);
+        end = System.nanoTime();
+        tempo = (end - start) / 1_000_000.0;
+        System.out.printf("Pivo aleatorio: %.6f ms%n", tempo);
+    }
+
+
     public static void main (String[] args)
     {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Digite o tamanho array: ");
-        int n = sc.nextInt();
-        int resultado = 0;
-        
-        int[] array = new int[n];
-        System.out.print("Digite os valores do array: ");
-        for (int i = 0; i < n; i++) 
+        int[] tamanhos = {100, 1000, 10000};
+
+        for (int n : tamanhos) 
         {
-            array[i] = sc.nextInt();
+            testar(gerarOrdenado(n), "ordenado");
+            testar(gerarQuaseOrdenado(n), "quase ordenado");
+            testar(gerarAleatorio(n), "aleatório");
         }
-
-        System.out.println("Escolha o algoritmo de ordenacao" );
-        System.out.println("1 - QuickSort ( Mediana de tres )");
-        System.out.println("2 - QuickSort ( Primeiro pivo )"  );
-        System.out.println("3 - QuickSort ( Ultimo pivo )"    );
-        System.out.println("4 - QuickSort ( Pivo aleatorio )" );
-
-        int opcao = sc.nextInt();  
-        switch(opcao)
-        {
-            case 1:
-                QuickSortMedianOfThree(array, 0, array.length - 1);
-                break;
-            case 2:
-                QuickSortFirstPivot(array, 0, array.length - 1);
-                break;
-            case 3:
-                QuickSortLastPivot(array, 0, array.length - 1);
-                break;
-            case 4:
-                QuickSortRandomPivot(array, 0, array.length - 1);
-                break;
-            default:
-                System.out.println("Numero invalido");
-                break;
-        }
-
-        System.out.println("Array ordenado: " + Arrays.toString(array));
         
     }
 }
