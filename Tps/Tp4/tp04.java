@@ -147,7 +147,6 @@ class Game
     public Game ler(String linha) 
     {
         Game g = new Game();
-
         String[] campos = linha.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 
         for (int i = 0; i < campos.length; i++) 
@@ -161,142 +160,181 @@ class Game
             if (i < campos.length) 
             {
                 dados[i] = campos[i];
-            } else {
-                dados[i] = ""; 
+            } 
+            else 
+            {
+                dados[i] = "";
             }
-    }
+        }
 
-    if (!dados[0].isEmpty()) 
-    {
+    if (!dados[0].isEmpty()) {
         g.setAppId(Integer.parseInt(dados[0]));
-    } 
-    else 
-    {
+    } else {
         g.setAppId(0);
     }
 
     g.setName(dados[1]);
     g.setReleaseDate(dados[2]);
 
-    if (!dados[3].isEmpty()) 
-    {
+    if (!dados[3].isEmpty()) {
         g.setEstimatedOwners(Integer.parseInt(dados[3]));
-    } 
-    else 
-    {
+    } else {
         g.setEstimatedOwners(0);
     }
 
-    if (!dados[4].isEmpty()) 
-    {
+    if (!dados[4].isEmpty()) {
         g.setPrice(Double.parseDouble(dados[4]));
-    } 
-    else 
-    {
+    } else {
         g.setPrice(0.0);
     }
 
-    if (!dados[5].isEmpty()) 
-    {
-        g.setSupportedLanguages(dados[5].split(";"));
-    } 
-    else 
-    {
+    if (!dados[5].isEmpty()) {
+        g.setSupportedLanguages(tratarArray(dados[5]));
+    } else {
         g.setSupportedLanguages(new String[0]);
     }
 
-    if (!dados[6].isEmpty()) 
-    {
+    if (!dados[6].isEmpty()) {
         g.setMetacriticScore(Integer.parseInt(dados[6]));
-    } 
-    else 
-    {
+    } else {
         g.setMetacriticScore(0);
     }
 
-    if (!dados[7].isEmpty()) 
-    {
+    if (!dados[7].isEmpty()) {
         g.setUserScore(Double.parseDouble(dados[7]));
-    } 
-    else 
-    {
+    } else {
         g.setUserScore(0.0);
     }
 
-    if (!dados[8].isEmpty()) 
-    {
+    if (!dados[8].isEmpty()) {
         g.setAchievements(Integer.parseInt(dados[8]));
-    } 
-    else 
-    {
+    } else {
         g.setAchievements(0);
     }
 
-    if (!dados[9].isEmpty()) 
-    {
-        g.setPublishers(dados[9].split(";"));
-    } 
-    else 
-    {
+    if (!dados[9].isEmpty()) {
+        g.setPublishers(tratarArray(dados[9]));
+    } else {
         g.setPublishers(new String[0]);
     }
 
-    if (!dados[10].isEmpty()) 
-    {
-        g.setDevelopers(dados[10].split(";"));
-    } 
-    else 
-    {
+    if (!dados[10].isEmpty()) {
+        g.setDevelopers(tratarArray(dados[10]));
+    } else {
         g.setDevelopers(new String[0]);
     }
 
-    if (!dados[11].isEmpty()) 
-    {
-        g.setCategories(dados[11].split(";"));
-    } 
-    else 
-    {
+    if (!dados[11].isEmpty()) {
+        g.setCategories(tratarArray(dados[11]));
+    } else {
         g.setCategories(new String[0]);
     }
 
-    if (!dados[12].isEmpty()) 
-    {
-        g.setGenres(dados[12].split(";"));
-    } 
-    else 
-    {
+    if (!dados[12].isEmpty()) {
+        g.setGenres(tratarArray(dados[12]));
+    } else {
         g.setGenres(new String[0]);
     }
 
-    if (!dados[13].isEmpty()) 
-    {
-        g.setTags(dados[13].split(";"));
-    } 
-    else 
-    {
+    if (!dados[13].isEmpty()) {
+        g.setTags(tratarArray(dados[13]));
+    } else {
         g.setTags(new String[0]);
     }
 
     return g;
 }
+ 
+        private String[] tratarArray(String campo) 
+        {
+            if (campo == null || campo.isEmpty()) return new String[0];
+
+            String temp = campo.replaceAll("^\\[|\\]$", "");
+            
+            String[] itens = temp.split(",");
+
+            for (int i = 0; i < itens.length; i++) {
+                itens[i] = itens[i].trim().replaceAll("^\"|\"$", "");
+            }
+
+            return itens;
+        }
+
+        private String formatarData(String data) 
+        {
+            if (data == null || data.isEmpty()) 
+            {
+                return "";
+            }
+
+            String[] partes = data.split(" ");
+            if (partes.length != 3) 
+            {
+                return data;
+            }
+
+            String mes = partes[0];
+            String dia = partes[1].replace(",", "");
+            String ano = partes[2];
+
+            int diaInt = Integer.parseInt(dia);
+            String diaFormatado = String.format("%02d", diaInt);
+
+            String mesNum = "";
+            switch (mes) 
+            {
+                case "Jan": mesNum = "01"; break;
+                case "Feb": mesNum = "02"; break;
+                case "Mar": mesNum = "03"; break;
+                case "Apr": mesNum = "04"; break;
+                case "May": mesNum = "05"; break;
+                case "Jun": mesNum = "06"; break;
+                case "Jul": mesNum = "07"; break;
+                case "Aug": mesNum = "08"; break;
+                case "Sep": mesNum = "09"; break;
+                case "Oct": mesNum = "10"; break;
+                case "Nov": mesNum = "11"; break;
+                case "Dec": mesNum = "12"; break;
+                default: mesNum = "00"; break;
+            }
+
+            return diaFormatado + "/" + mesNum + "/" + ano;
+        }
+
+
+    private String formatarArray(String[] arr) 
+    {
+        if (arr == null || arr.length == 0) 
+        {
+            return "[]";
+        }
+
+        for (int i = 0; i < arr.length; i++) 
+        {
+            arr[i] = arr[i].trim().replaceAll("^['\"]|['\"]$", "");
+        }
+
+        return "[" + String.join(", ", arr) + "]";
+    }
+
 
     public String formatarSaida() 
     {
         return "=> " + AppId +
-               " ## " + name +
-               " ## " + releaseDate +
-               " ## " + estimatedOwners +
-               " ## " + price +
-               " ## " + Arrays.toString(supportedLanguages) +
-               " ## " + metacriticScore +
-               " ## " + userScore +
-               " ## " + achievements +
-               " ## " + Arrays.toString(publishers) +
-               " ## " + Arrays.toString(developers) +
-               " ## " + Arrays.toString(categories) +
-               " ## " + Arrays.toString(genres) +
-               " ## " + Arrays.toString(tags) +
-               " ##";
+                " ## " + name +
+                " ## " + formatarData(releaseDate) +
+                " ## " + estimatedOwners +
+                " ## " + price +
+                " ## " + formatarArray(supportedLanguages) +
+                " ## " + metacriticScore +
+                " ## " + userScore +
+                " ## " + achievements +
+                " ## " + formatarArray(publishers) +
+                " ## " + formatarArray(developers) +
+                " ## " + formatarArray(categories) +
+                " ## " + formatarArray(genres) +
+                " ## " + formatarArray(tags) +
+                " ##";
     }
 }
 
@@ -304,12 +342,12 @@ public class tp04
 {
     public static void main(String[] args) 
     {
-        Game[] lista = new Game[50000];
+        Game[] lista = new Game[100000];
         int count = 0;
 
         try 
         {
-            Scanner arquivo = new Scanner(new File("games.csv"));
+            Scanner arquivo = new Scanner(new File("/tmp/games.csv"));
             if (arquivo.hasNextLine()) arquivo.nextLine(); 
 
             while (arquivo.hasNextLine() && count < lista.length) 
@@ -326,7 +364,6 @@ public class tp04
         } 
         catch (Exception e) 
         {
-            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
             return;
         }
 
@@ -352,13 +389,13 @@ public class tp04
 
                 if (!encontrado) 
                 {
-                    System.out.println("Jogo com ID " + id + " nao encontrado");
+                    System.out.println("");
                 }
 
             } 
             catch (NumberFormatException e) 
             {
-                System.out.println("Entrada invalida, digite um numero ou 'FIM'");
+                System.out.println("");
             }
         }
         sc.close();
