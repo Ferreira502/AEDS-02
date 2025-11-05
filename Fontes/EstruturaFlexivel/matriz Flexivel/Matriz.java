@@ -256,4 +256,110 @@ class Matriz
         // System.out.println("\nApós remover a coluna 1:");
         // m.mostrar(3, 3);
     }
+
+    // Mostrar uma coluna específica da matriz
+    public void mostrarColuna(int colunaSelecionada) {
+        if (colunaSelecionada < 0 || colunaSelecionada >= this.coluna) {
+            System.out.println("Índice de coluna inválido!");
+            return;
+        }
+
+        Celula tmpLinha = inicio;
+
+        // Caminha até a coluna desejada
+        for (int j = 0; j < colunaSelecionada; j++) {
+            tmpLinha = tmpLinha.dir;
+        }
+
+        // Agora tmpLinha está no topo da coluna desejada
+        System.out.println("Coluna " + colunaSelecionada + ":");
+        while (tmpLinha != null) {
+            System.out.println(tmpLinha.elemento);
+            tmpLinha = tmpLinha.inf;
+        }
+    }
+
+    // Remove o elemento de uma coluna e linha específica
+    public void removerElementoColuna(int linhaRemover, int colunaRemover) {
+        if (linhaRemover < 0 || linhaRemover >= this.linha || 
+            colunaRemover < 0 || colunaRemover >= this.coluna) {
+            System.out.println("Posição inválida!");
+            return;
+        }
+
+        Celula tmp = inicio;
+
+        // Caminha até a coluna desejada
+        for (int j = 0; j < colunaRemover; j++) {
+            tmp = tmp.dir;
+        }
+
+        // Caminha até a linha desejada
+        for (int i = 0; i < linhaRemover; i++) {
+            tmp = tmp.inf;
+        }
+
+        // "Remove" o valor (zera o conteúdo)
+        tmp.elemento = 0;
+        System.out.println("Elemento da posição [" + linhaRemover + "][" + colunaRemover + "] removido!");
+    }
+
+
+    // Remove uma coluna inteira da matriz
+    public void removerColuna(int colunaRemover) {
+        if (colunaRemover < 0 || colunaRemover >= this.coluna) {
+            System.out.println("Índice de coluna inválido!");
+            return;
+        }
+
+        // Caso especial: remover a primeira coluna (coluna 0)
+        if (colunaRemover == 0) {
+            Celula linhaAtual = inicio;
+            while (linhaAtual != null) {
+                Celula remover = linhaAtual;
+                linhaAtual = linhaAtual.inf;
+
+                // Move o início da linha para a direita
+                inicio = remover.dir;
+                if (inicio != null) inicio.esq = null;
+
+                // Desconecta completamente a célula
+                remover.dir = remover.esq = remover.inf = remover.sup = null;
+            }
+        } else {
+            Celula linhaAtual = inicio;
+
+            // Percorre todas as linhas da matriz
+            for (int i = 0; i < linha; i++) {
+                Celula tmp = linhaAtual;
+
+                // Caminha até a célula anterior à coluna que será removida
+                for (int j = 0; j < colunaRemover - 1; j++) {
+                    tmp = tmp.dir;
+                }
+
+                Celula remover = tmp.dir; // célula a remover
+
+                if (remover != null) {
+                    // Conecta a célula da esquerda com a da direita
+                    tmp.dir = remover.dir;
+                    if (remover.dir != null) remover.dir.esq = tmp;
+
+                    // Desconecta as referências verticais
+                    if (remover.sup != null) remover.sup.inf = remover.inf;
+                    if (remover.inf != null) remover.inf.sup = remover.sup;
+
+                    // Quebra todas as ligações da célula removida
+                    remover.dir = remover.esq = remover.sup = remover.inf = null;
+                }
+
+                // Desce para a próxima linha
+                linhaAtual = linhaAtual.inf;
+            }
+        }
+
+        this.coluna--; // Atualiza o número total de colunas
+        System.out.println("Coluna " + colunaRemover + " removida com sucesso!");
+    }
+
 }
