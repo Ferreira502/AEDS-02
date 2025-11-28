@@ -1,7 +1,7 @@
 /* 
 842527 - Gabriel Ferreira Pereira
 
-Separando cada elemento do arquivo csv:
+Separando cada elemento do arquivouivo csv:
 AppId: 897820
 Name:Reigns: Game of Thrones
 Release date: "Oct 18, 2018"
@@ -18,7 +18,7 @@ Genres: "Adventure,Indie,RPG"
 Tags: "RPG,Indie,Card Game,Adventure,Choices Matter,2D,Medieval,Singleplayer,Minimalist,Choose Your Own Adventure,Strategy,Story Rich,Dark Humor,Great Soundtrack,Difficult,Dark Comedy,Funny,Comedy,Cute"
 
 Todos as estruturas foram retirados do github de Aeds2 na pasta fonte e foram modificados para Arvore Binaria, realizando insercoes de registros conforme a entrada padrao
-Bibliotecas: java.io.BufferedWriter; java.io.FileWriter; java.io.IOException; import java.io.*; foram usadas para manipular os arquivos do csv e txt, 
+Bibliotecas: java.io.BufferedWriter; java.io.FileWriter; java.io.IOException; import java.io.*; foram usadas para manipular os arquivouivos do csv e txt, 
 para eu utiliza-las pesquisei seu funcionamento no site "W3Schools"
 */
 
@@ -27,7 +27,6 @@ import java.util.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
 
 class Game 
 {
@@ -49,129 +48,143 @@ class Game
     public static int movimentacoes = 0;
 
     public int getAppId() 
-    { 
-        return AppId; 
+    {
+        return AppId;
     }
+
     public void setAppId(int AppId) 
-    { 
-        this.AppId = AppId; 
+    {
+        this.AppId = AppId;
     }
 
     public String getName() 
-    { 
-        return name; 
+    {
+        return name;
     }
+
     public void setName(String name) 
-    { 
-        this.name = name; 
+    {
+        this.name = name;
     }
 
     public String getReleaseDate() 
-    { 
-        return releaseDate; 
+    {
+        return releaseDate;
     }
+
     public void setReleaseDate(String releaseDate) 
-    { 
-        this.releaseDate = releaseDate; 
+    {
+        this.releaseDate = releaseDate;
     }
 
     public int getEstimatedOwners() 
-    { 
-        return estimatedOwners; 
+    {
+        return estimatedOwners;
     }
+
     public void setEstimatedOwners(int estimatedOwners) 
-    { 
-        this.estimatedOwners = estimatedOwners; 
+    {
+        this.estimatedOwners = estimatedOwners;
     }
 
     public double getPrice() 
-    { 
-        return price; 
+    {
+        return price;
     }
+
     public void setPrice(double price) 
-    { 
-        this.price = price; 
+    {
+        this.price = price;
     }
-    
+
     public String[] getSupportedLanguages() 
-    { 
-        return supportedLanguages; 
+    {
+        return supportedLanguages;
     }
+
     public void setSupportedLanguages(String[] supportedLanguages) 
-    { 
-        this.supportedLanguages = supportedLanguages; 
+    {
+        this.supportedLanguages = supportedLanguages;
     }
 
     public int getMetacriticScore() 
-    { 
-        return metacriticScore; 
+    {
+        return metacriticScore;
     }
+
     public void setMetacriticScore(int metacriticScore) 
-    { 
-        this.metacriticScore = metacriticScore; 
+    {
+        this.metacriticScore = metacriticScore;
     }
 
     public double getUserScore() 
-    { 
-        return userScore; 
+    {
+        return userScore;
     }
+
     public void setUserScore(double userScore) 
-    { 
-        this.userScore = userScore; 
+    {
+        this.userScore = userScore;
     }
 
     public int getAchievements() 
-    { 
-        return achievements; 
+    {
+        return achievements;
     }
+
     public void setAchievements(int achievements) 
-    { 
+    {
         this.achievements = achievements;
     }
 
-    public String[] getPublishers() 
-    { 
-        return publishers; 
+    public String[] getPublishers()
+    {
+        return publishers;
     }
+
     public void setPublishers(String[] publishers) 
-    { 
-        this.publishers = publishers; 
+    {
+        this.publishers = publishers;
     }
 
     public String[] getDevelopers() 
-    { 
-        return developers; 
+    {
+        return developers;
     }
+
     public void setDevelopers(String[] developers) 
-    { 
-        this.developers = developers; 
+    {
+        this.developers = developers;
     }
 
     public String[] getCategories() 
-    { 
-        return categories; 
+    {
+        return categories;
     }
+
     public void setCategories(String[] categories) 
-    { 
-        this.categories = categories; 
+    {
+        this.categories = categories;
     }
 
     public String[] getGenres() 
-    { 
-        return genres; 
+    {
+        return genres;
     }
+
     public void setGenres(String[] genres) 
-    { 
-        this.genres = genres; 
+    {
+        this.genres = genres;
     }
-    
+
     public String[] getTags() 
-    { 
-        return tags; 
+    {
+        return tags;
     }
+
     public void setTags(String[] tags) 
-    { 
-        this.tags = tags; 
+    {
+        this.tags = tags;
     }
 
     public static Game ler(String linha) 
@@ -197,8 +210,8 @@ class Game
         return g;
     }
 
-    //funcao para separar linha no arquivo mantendo o colchete  
-    private static String[] splitParaVirgulaDentroAspas(String linha)
+    // funcao para separar linha no arquivouivo mantendo o colchete
+    private static String[] splitParaVirgulaDentroAspas(String linha) 
     {
         String[] campos = new String[100];
         int count = 0;
@@ -213,7 +226,7 @@ class Game
 
             if (c == '\"') 
             {
-                dentroAspas = !dentroAspas; 
+                dentroAspas = !dentroAspas;
                 campoAtual.append(c);
             } 
             else if (c == '[') 
@@ -248,7 +261,7 @@ class Game
         return resultado;
     }
 
-    //trocar a data do arquivo de "Oct 18, 2018" para "18/10/2018"
+    // trocar a data do arquivouivo de "Oct 18, 2018" para "18/10/2018"
     private static String formatarData(String data) 
     {
         if (data == null || data.isEmpty()) 
@@ -257,7 +270,7 @@ class Game
         }
 
         String[] partes = data.split(" ");
-        
+
         if (partes.length < 3) 
         {
             return data;
@@ -273,7 +286,7 @@ class Game
         if (dia < 10) 
         {
             diaFormatado = "0" + dia;
-        } 
+        }
         else 
         {
             diaFormatado = String.valueOf(dia);
@@ -282,40 +295,72 @@ class Game
         String mesFormatado;
         switch (mesTexto) 
         {
-            case "Jan": mesFormatado = "01"; break;
-            case "Feb": mesFormatado = "02"; break;
-            case "Mar": mesFormatado = "03"; break;
-            case "Apr": mesFormatado = "04"; break;
-            case "May": mesFormatado = "05"; break;
-            case "Jun": mesFormatado = "06"; break;
-            case "Jul": mesFormatado = "07"; break;
-            case "Aug": mesFormatado = "08"; break;
-            case "Sep": mesFormatado = "09"; break;
-            case "Oct": mesFormatado = "10"; break;
-            case "Nov": mesFormatado = "11"; break;
-            case "Dec": mesFormatado = "12"; break;
-            default: mesFormatado = "00"; break;
+            case "Jan":
+                mesFormatado = "01";
+                break;
+            case "Feb":
+                mesFormatado = "02";
+                break;
+            case "Mar":
+                mesFormatado = "03";
+                break;
+            case "Apr":
+                mesFormatado = "04";
+                break;
+            case "May":
+                mesFormatado = "05";
+                break;
+            case "Jun":
+                mesFormatado = "06";
+                break;
+            case "Jul":
+                mesFormatado = "07";
+                break;
+            case "Aug":
+                mesFormatado = "08";
+                break;
+            case "Sep":
+                mesFormatado = "09";
+                break;
+            case "Oct":
+                mesFormatado = "10";
+                break;
+            case "Nov":
+                mesFormatado = "11";
+                break;
+            case "Dec":
+                mesFormatado = "12";
+                break;
+            default:
+                mesFormatado = "00";
+                break;
         }
 
         return diaFormatado + "/" + mesFormatado + "/" + anoTexto;
     }
 
-    //troca o "\" por espaco
+    // troca o "\" por espaco
     private static String colocarEspaco(String[] c, int i) 
     {
-        if (i >= c.length) return "";
+        if (i >= c.length)
+        {
+            return "";
+        }
         return c[i].replace("\"", "").trim();
     }
 
-    //remove colchetes, aspas simples e duplas, e espacos extras
+    // remove colchetes, aspas simples e duplas, e espacos extras
     private static String[] stringParaArray(String campo) 
     {
         campo = campo.replace("[", "").replace("]", "").replace("'", "").replace("\"", "").trim();
-        if (campo.isEmpty()) return new String[0];
+        if (campo.isEmpty()) 
+        {
+            return new String[0];
+        }
         return campo.split(",");
     }
 
-    //gera a saida igual esta no verde
+    // gera a saida igual esta no verde
     public String formatarSaida(int x) 
     {
         return "[" + x + "] => " + AppId + " ## " + name + " ## " + releaseDate + " ## " + estimatedOwners
@@ -326,89 +371,168 @@ class Game
     }
 }
 
-class No 
+// Arvore Binaria de Arvores
+class No2 
 {
-    public Game elemento;
-    public No esq, dir;
+    public String chave;
+    public No2 esq, dir;
 
-    public No(Game elemento) 
+    public No2(String chave) 
     {
-        this.elemento = elemento;
-        this.esq = this.dir = null;
+        this.chave = chave;
+        esq = dir = null;
     }
 }
 
-class ArvoreBinaria 
+class No1 
 {
-    private No raiz;
+    public int chave;
+    public No1 esq, dir;
+    public No2 raiz2;
 
-    public ArvoreBinaria() 
+    public No1(int chave) 
+    {
+        this.chave = chave;
+        esq = dir = null;
+        raiz2 = null;
+    }
+}
+
+class ArvoreArvore 
+{
+
+    private No1 raiz;
+
+    public ArvoreArvore() 
     {
         raiz = null;
     }
 
-    public void inserir(Game x) throws Exception 
+    public void inserirPrimeira(int x) throws Exception 
     {
-        raiz = inserir(x, raiz);
+        raiz = inserirPrimeira(x, raiz);
     }
 
-    private No inserir(Game x, No i) throws Exception 
+    private No1 inserirPrimeira(int x, No1 i) throws Exception 
     {
-        if (i == null) 
-        {
-            return new No(x);
-        }
-        Game.comparacoes++;
+        if (i == null)
+            return new No1(x);
 
-        if (x.getName().compareTo(i.elemento.getName()) < 0) 
+        if (x < i.chave) 
         {
-            Game.comparacoes++;
-            i.esq = inserir(x, i.esq);
+            i.esq = inserirPrimeira(x, i.esq);
+
         } 
-        else if (x.getName().compareTo(i.elemento.getName()) > 0) 
+        else if (x > i.chave) 
         {
-            Game.comparacoes++;
-            i.dir = inserir(x, i.dir);
+            i.dir = inserirPrimeira(x, i.dir);
         }
         return i;
     }
 
-    public boolean pesquisar(String nome) 
+    public void inserirSegunda(Game g) throws Exception 
     {
-        System.out.print(nome + ": =>raiz ");
-        return pesquisar(nome, raiz);
+        int chave = g.getEstimatedOwners() % 15;
+        No1 no = pesquisarPrimeira(chave, raiz);
+        if (no != null) 
+        {
+            no.raiz2 = inserirSegunda(g.getName(), no.raiz2);
+        }
     }
 
-    private boolean pesquisar(String nome, No i) 
+    private No2 inserirSegunda(String s, No2 i) 
     {
         if (i == null) 
         {
-            Game.comparacoes++;
+            return new No2(s);
+        }
+
+        if (s.compareTo(i.chave) < 0) 
+        {
+            i.esq = inserirSegunda(s, i.esq);
+        } 
+        else if (s.compareTo(i.chave) > 0) 
+        {
+            i.dir = inserirSegunda(s, i.dir);
+        }
+
+        return i;
+    }
+
+    private No1 pesquisarPrimeira(int x, No1 i) 
+    {
+        if (i == null) 
+        {
+            return null;
+        }
+
+        if (x == i.chave) 
+        {
+            return i;
+        }
+        if (x < i.chave) 
+        {
+            return pesquisarPrimeira(x, i.esq);
+        }
+        return pesquisarPrimeira(x, i.dir);
+    }
+
+    public boolean pesquisarMostrar(String nome) 
+    {
+        System.out.print("=> " + nome + " => raiz ");
+        return pesquisarPrimeiraMostrar(nome, raiz);
+    }
+
+    private boolean pesquisarPrimeiraMostrar(String nome, No1 i) 
+    {
+        if (i == null) 
+        {
             return false;
         }
 
-        Game.comparacoes++;
-        if (nome.compareTo(i.elemento.getName()) == 0) 
+        if (pesquisarSegundaMostrar(nome, i.raiz2)) 
         {
             return true;
-        } 
-        else if (nome.compareTo(i.elemento.getName()) < 0) 
+        }
+
+        System.out.print("ESQ ");
+        if (pesquisarPrimeiraMostrar(nome, i.esq)) 
         {
-            Game.comparacoes++;
+            return true;
+        }
+
+        System.out.print("DIR ");
+        return pesquisarPrimeiraMostrar(nome, i.dir);
+    }
+
+    private boolean pesquisarSegundaMostrar(String nome, No2 i) 
+    {
+        if (i == null)
+        {
+            return false;
+        }
+
+        if (nome.equals(i.chave))
+        {
+            return true;
+        }
+
+        if (nome.compareTo(i.chave) < 0) 
+        {
             System.out.print("esq ");
-            return pesquisar(nome, i.esq);
+            return pesquisarSegundaMostrar(nome, i.esq);
         } 
+        
         else 
         {
-            Game.comparacoes++;
             System.out.print("dir ");
-            return pesquisar(nome, i.dir);
+            return pesquisarSegundaMostrar(nome, i.dir);
         }
     }
+
 }
 
-
-public class TP07Q01 
+public class TP07Q02 
 {
 
     public static Game buscarGamePorId(Game[] lista, int count, int id) 
@@ -425,90 +549,79 @@ public class TP07Q01
 
     public static void main(String[] args) 
     {
-        Game[] lista = new Game[100000];
+        Game[] lista = new Game[200000];
         int count = 0;
-        long inicio = System.nanoTime();
+
         try 
         {
             Scanner arquivo = new Scanner(new File("/tmp/games.csv")); // /tmp/games.csv para poder abrir o arquivo no verde
-            if (arquivo.hasNextLine())
-            {
-                arquivo.nextLine(); //pula o cabecalho
-            }
+            arquivo.nextLine();
 
-            while (arquivo.hasNextLine() && count < lista.length) 
+            while (arquivo.hasNextLine())
             {
-                String linha = arquivo.nextLine();
-                if (!linha.trim().isEmpty()) 
-                {
-                    lista[count++] = Game.ler(linha); //chama o metodo de leitura 
-                }
+                lista[count++] = Game.ler(arquivo.nextLine());
             }
             arquivo.close();
-        } 
-        catch (Exception e) 
-        {
-            return; //nao abriu o arquivo
-        }
+
+        } catch (Exception e) {}
 
         Scanner sc = new Scanner(System.in);
-        ArvoreBinaria arvore = new ArvoreBinaria();
 
-        // inserindo
+        ArvoreArvore arv = new ArvoreArvore();
+
+        // arvore fixa
+        int[] primeiros = { 7, 3, 11, 1, 5, 9, 13, 0, 2, 4, 6, 8, 10, 12, 14 };
+        try 
+        {
+            for (int i = 0; i < primeiros.length; i++)
+            {
+                arv.inserirPrimeira(primeiros[i]);
+            }
+
+        } catch (Exception e) {}
+
+        // inserir games na segunda arvore
         while (true) 
         {
             String entrada = sc.nextLine().trim();
             if (entrada.equals("FIM"))
+            {
                 break;
+            }
 
             int id = Integer.parseInt(entrada);
             Game g = buscarGamePorId(lista, count, id);
 
             if (g != null) 
-                {
+            {
                 try 
                 {
-                    arvore.inserir(g);
-                }
-                 catch (Exception e) 
-                {
-                }
+                    arv.inserirSegunda(g);
+                } 
+                catch (Exception e) {}
             }
         }
 
-        // pesquisa por nome
+        // Pesquisar nomes
         while (sc.hasNextLine()) 
         {
             String nome = sc.nextLine().trim();
             if (nome.equals("FIM"))
+            {
                 break;
+            }
 
-            boolean resp = arvore.pesquisar(nome);
+            boolean achou = arv.pesquisarMostrar(nome);
 
-            if (resp)
+            if (achou)
+            {
                 System.out.println("SIM");
+            }
+
             else
+            {
                 System.out.println("NAO");
-        }
-
-        double fim = System.nanoTime();
-        double tempoSegundos = (fim - inicio) / 1_000_000_000.0;
-
-        String nomeArquivo = "842527_binaria.txt";
-        try 
-        {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo));
-            writer.write("numero de comparacoes: " + Game.comparacoes);
-            writer.newLine();
-            writer.write("numero de movimentacoes: " + Game.movimentacoes);
-            writer.newLine();
-            writer.write(String.format("Tempo de execucao: %f segundos", tempoSegundos));
-            writer.newLine();
-            writer.close();
-        } 
-        catch (IOException e) 
-        {
-            System.out.println("Erro ao gerar arquivo");
+            }
         }
     }
 }
