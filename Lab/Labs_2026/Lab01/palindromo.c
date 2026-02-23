@@ -1,4 +1,5 @@
-
+//Algoritmo para solucionar o problema de palindromo, de forma interativa e de forma recursiva
+//Complexidade: O(n)
 
 #include<stdio.h>
 #include<string.h>
